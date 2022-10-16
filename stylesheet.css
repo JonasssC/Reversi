@@ -1,0 +1,253 @@
+* {
+    padding: 0;
+    margin: 0;
+
+    font-family: Verdana, sans-serif;
+    font-size: 25px;
+    font-weight: bolder;
+
+    --empty-color: #e2c8a6;
+    --button-color: var(--empty-color);
+    --button-hover-color: blanchedalmond;
+    --border-color: burlywood;
+
+    --player-X-color: black;
+    --player-X-border-color: #555555;
+    --player-X-empty-color: #333333;
+
+    --player-O-color: white;
+    --player-O-border-color: #bbbbbb;
+    --player-O-empty-color: #dddddd;
+
+    user-select: none;
+}
+
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background-color: lightblue;
+}
+
+.red {
+    background-color: red;
+}
+
+table, .winner_marker, .draw_marker, .skipped_marker {
+    border-style: outset;
+    border-width: 10px;
+    border-color: var(--border-color);
+    width: max-content;
+    background-color: var(--empty-color);
+    border-spacing: 5px;
+}
+
+.winner_marker, .draw_marker, .skipped_marker {
+    padding: 5px;
+    text-align: center;
+    width: 200px;
+
+    position: absolute;
+
+    transition: all 1s ease-in-out;
+}
+
+.winner_marker, .draw_marker {
+    top: 30px;
+}
+
+.skipped_marker {
+    top: 100px;
+}
+
+.winner_marker.x, .draw_marker.x, .skipped_marker.x {
+    left: 80px;
+
+    color: var(--player-O-color);
+    border-color: var(--player-X-border-color);
+    background-color: var(--player-X-empty-color);
+}
+
+.winner_marker.o, .draw_marker.o, .skipped_marker.o {
+    right: 80px;
+
+    color: var(--player-X-color);
+    border-color: ghostwhite;
+    background-color: var(--player-O-empty-color);
+}
+
+#board_wrapper[data-winner="x"] .winner_marker.x {
+    left: -140px;
+}
+
+#board_wrapper[data-winner="o"] .winner_marker.o {
+    right: -140px;
+}
+
+#board_wrapper[data-skipped="x"] .skipped_marker.x {
+    left: -140px;
+}
+
+#board_wrapper[data-skipped="o"] .skipped_marker.o {
+    right: -140px;
+}
+
+#board_wrapper[data-winner="draw"] .draw_marker.x {
+    left: -140px;
+}
+
+#board_wrapper[data-winner="draw"] .draw_marker.o {
+    right: -140px;
+}
+
+td {
+    width: 0;
+    height: 0;
+    background-color: var(--empty-color);
+    border-style: inset;
+    border-width: 35px;
+    border-color: var(--border-color);
+    border-radius: 1000px;
+    transition: all ease-in-out 0.5s;
+    text-align: center;
+}
+
+td.x {
+    background-color: var(--player-X-color);
+    color: var(--player-O-color);
+}
+
+td.o {
+    background-color: var(--player-O-color);
+    color: var(--player-X-color);
+}
+
+td.o, td.x, #timer_row td {
+    border-width: 10px;
+    width: 50px;
+    height: 50px;
+}
+
+td.opt {
+    animation: blink_player 1s infinite;
+}
+
+td.button {
+    border-width: 10px;
+    width: 150px;
+    height: 50px;
+    background-color: var(--button-color);
+}
+
+td.button:hover {
+    background-color: var(--button-hover-color);
+}
+
+#board_wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.score_container {
+    height: max-content;
+    width: max-content;
+}
+
+.left, .right, .top, .bottom {
+    position: relative;
+}
+
+.above {
+    z-index: 1;
+}
+
+.below {
+    z-index: -1;
+}
+
+.left {
+    border-right: none;
+    margin-right: -10px;
+}
+
+.right {
+    border-left: none;
+    margin-left: -10px;
+}
+
+.top {
+    border-bottom: none;
+    margin-bottom: -10px;
+}
+
+.bottom {
+    border-top: none;
+    margin-top: -10px;
+}
+
+.left::after, .right::after, .top::after, .bottom::after {
+    content: '';
+    position: absolute;
+    display: block;
+    max-width: 0;
+    max-height: 0;
+    border-style: inset;
+    border-width: 10px;
+    border-color: var(--border-color);
+}
+
+.left::after {
+    right: 0;
+    bottom: -10px;
+    border-bottom: none;
+    border-left: none;
+    -moz-transform: translateY(-10px);
+}
+
+.top::after {
+    right: -10px;
+    bottom: 0;
+    border-bottom: none;
+    border-left: none;
+    -moz-transform: translateX(-10px);
+}
+
+.right::after {
+    left: 0;
+    top: -10px;
+    border-top: none;
+    border-right: none;
+    -moz-transform: translateY(10px);
+}
+
+.bottom::after {
+    left: -10px;
+    top: 0;
+    border-top: none;
+    border-right: none;
+    -moz-transform: translateX(10px);
+}
+
+@keyframes blink_player {
+    0%, 100% {
+        border-width: 35px;
+        width: 0;
+        height: 0;
+    }
+    50% {
+        border-width: 20px;
+        width: 30px;
+        height: 30px;
+    }
+}

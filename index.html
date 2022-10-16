@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Reversi</title>
+        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+        <meta content="utf-8" http-equiv="encoding">
+        <script src="code.js"></script>
+        <link rel="stylesheet" type="text/css" href="stylesheet.css">
+    </head>
+    <body>
+        <table class="timer_container top above">
+            <tbody>
+                <tr id="timer_row">
+                    <td>0</td>
+                    <td>0</td>
+                    <td>:</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+        <div id="board_wrapper">
+            <div class="winner_marker x below">
+                Black wins
+            </div>
+            <div class="draw_marker x below">
+                It's a draw
+            </div>
+            <div class="skipped_marker x below">
+                Turn skipped
+            </div>
+            <div class="winner_marker o below">
+                White wins
+            </div>
+            <div class="draw_marker o below">
+                It's a draw
+            </div>
+            <div class="skipped_marker o below">
+                Turn skipped
+            </div>
+            <table class="score_container left above">
+                <tbody>
+                    <tr>
+                        <td class="score x">skipped</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="board_container"></div>
+            <table class="score_container right above">
+                <tbody>
+                    <tr>
+                        <td class="score o">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <table class="button_container bottom above">
+            <tbody>
+                <tr>
+                    <td class="button" onclick="board.new_game()">New Game</td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
